@@ -1,0 +1,45 @@
+
+#title_bar table
+{
+    font-family: Tahoma;
+    font-size: 12px;
+    width: 100%;
+}
+#title_bar table td
+{
+    padding: 5px;
+
+}
+#title_bar table a
+{
+    background: #eee;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    display:block;
+}
+#title_bar table a:hover
+{
+    background: #fff;
+}
+#container
+{
+    border:1px solid black;
+    padding: 10px;
+    margin: 5px;
+}
+#viewbox
+{
+    border:1px solid black;
+    padding: 10px;
+    margin: 5px;
+}
+.viewalbm
+{
+    width:100%;
+}
+.disimg
+{
+   padding-right: 20px;
+    margin-right: 5px;
+}
