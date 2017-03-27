@@ -27,7 +27,22 @@ class PlaceDAO
     }
     public function getApprovedPlaces(){
         $query ="SELECT * FROM places WHERE approved=1";
+
         $pdostmt=$this->db->prepare($query);
+        $pdostmt->execute();
+
+        $places=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Place");
+        return $places;
+    }
+     public function getApprovedPlacesBylocation($lat,$lng,$zoom){
+        $query ="SELECT *,( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * 
+                cos( radians(   lng ) - radians(:lng) ) + sin( radians(:lat) ) * sin(radians(lat)) ) )  AS distance 
+                FROM places WHERE approved=1  HAVING distance < :zoom ORDER BY distance LIMIT 0 , 20 ";
+
+        $pdostmt=$this->db->prepare($query);
+        $pdostmt->bindValue(':lat',$lat,PDO::PARAM_STR);
+        $pdostmt->bindValue(':lng',$lng,PDO::PARAM_STR);
+        $pdostmt->bindValue(':zoom',$zoom,PDO::PARAM_STR);
         $pdostmt->execute();
 
         $places=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Place");

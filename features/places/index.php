@@ -8,7 +8,17 @@ if ($action==='viewlist')
 
 	$db=Connect::DBconnect();
 	$placesobj=new PlaceDAO($db);
-	$places=$placesobj->getApprovedPlaces();
+	$search_place='';	
+	
+	if(isset($_POST['map_zoom']))
+	{
+		$search_place=$_POST['search_place'];
+		$distance=($_POST['map_zoom']/1000.0) < 2.5 ? 2.5:$_POST['map_zoom']/1000.0;
+		$places=$placesobj->getApprovedPlacesByLocation($_POST['map_lat'],$_POST['map_lng'],$distance);
+	}
+	else
+		$places=$placesobj->getApprovedPlaces();
+
 	require_once 'views/view_places.php';
 }
 else if ($action==='viewplace' && isset($_GET['id'])) 

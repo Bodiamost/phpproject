@@ -25,6 +25,7 @@ if(isset($_GET['feature']))
     <link href="css/buttons.css" rel="stylesheet">
     <link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" /><!-- FOR Chat!!!!-->
     <link rel='stylesheet' type='text/css' href='features/albums/style.css'/><!--FOR albums-->
+    <link rel='stylesheet' type='text/css' href='features/places/style.css'/><!--FOR places search -->
 
     
     <script src="js/jquery.1.11.1.min.js"></script>
