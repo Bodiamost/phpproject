@@ -33,7 +33,7 @@
 
 		//$place->setImage("");
 		$place->setRating("0");
-		$place->setPostedBy("1");
+		$place->setPostedBy($_SESSION['user_id']);
 		$place->setPosted(date("Y-m-d H:i:s"));
 		$place->setApproved("0");
 		$place->setVerified("0");

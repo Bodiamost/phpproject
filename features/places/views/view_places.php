@@ -32,7 +32,7 @@
                 <a href='home.php?feature=places&action=deleteplace&id=<?php echo($place->getId());?>'>Delete</a>-->
             </div>       
         </div>
-        <?php if(++$counter % 3 === 0):?> </div><div class="box-body row widget"><?php endif;?>
+        <?php if(++$counter % 2 === 0):?> </div><div class="box-body row widget"><?php endif;?>
         <?php };?>
     </div>
     <div class="box-footer">

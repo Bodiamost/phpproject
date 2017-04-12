@@ -1,4 +1,7 @@
 <?php 
+session_save_path('/home/users/web/b577/ipg.bohdanmostcom/cgi-bin/tmp'); 
+session_start();
+$_SESSION['user_id']=1;
 $feature='home';
 //$action='view';
 if(isset($_GET['feature']))
@@ -23,7 +26,7 @@ if(isset($_GET['feature']))
     <link href="css/cover.css" rel="stylesheet">
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/buttons.css" rel="stylesheet">
-    <link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" /><!-- FOR Chat!!!!-->
+    <!--<link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" /><!-- FOR Chat!!!!-->
     <link rel='stylesheet' type='text/css' href='features/albums/style.css'/><!--FOR albums-->
     <link rel='stylesheet' type='text/css' href='features/places/style.css'/><!--FOR places search -->
 
@@ -129,9 +132,9 @@ if(isset($_GET['feature']))
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="home.php?feature=places&action=viewlist"> <i class="fa fa-map"></i>  Places</a></li>
                   <li><a href="home.php?feature=events&action=viewlist"> <i class="fa fa-calendar"></i> Events</a></li>
-                  <li><a href="home.php"> <i class="fa fa-glass"></i> Restaurants</a></li>
-                  <li><a href="home.php"> <i class="fa fa-car"></i> Trips</a></li>  
-                  <li><a href="home.php"> <i class="fa fa-tasks"></i> Plan your trip</a></li>
+                  <li><a href="home.php?feature=cafes&action=viewlist"> <i class="fa fa-glass"></i> Restaurants</a></li>
+                  <li><a href="home.php?feature=trips&action=viewlist"> <i class="fa fa-car"></i> Trips</a></li>  
+                  <li><a href="home.php?feature=trips&action=new_trip"> <i class="fa fa-tasks"></i> Plan your trip</a></li>
                 </ul>
               </div>
             </div>
@@ -156,6 +159,18 @@ if(isset($_GET['feature']))
 	          {
       		    require_once 'features/places/index.php';
       	    } 
+            else if ($feature==='events') 
+            {
+              require_once 'features/events/index.php';
+            } 
+            else if ($feature==='cafes') 
+            {
+              require_once 'features/restaurants/index.php';
+            } 
+            else if ($feature==='trips') 
+            {
+              require_once 'features/trips/index.php';
+            } 
             else if ($feature==='faq') 
 	          {
               echo '<div class="box" style="height:2200px;">';

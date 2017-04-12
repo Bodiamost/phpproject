@@ -116,9 +116,9 @@ if(isset($_GET['feature']))
               <div class="widget-body">
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="admin.php?feature=places&action=viewlist"> <i class="fa fa-map"></i>  Places</a></li>
-                  <li><a href="#"> <i class="fa fa-calendar"></i> Events</a></li>
-                  <li><a href="#"> <i class="fa fa-glass"></i> Restaurants</a></li>
-                  <li><a href="#"> <i class="fa fa-car"></i> Trips</a></li>  
+                  <li><a href="admin.php?feature=events&action=viewlist"> <i class="fa fa-calendar"></i> Events</a></li>
+                  <li><a href="admin.php?feature=cafes&action=viewlist"> <i class="fa fa-glass"></i> Restaurants</a></li>
+                  <li><a href="admin.php?feature=trips&action=viewlist"> <i class="fa fa-car"></i> Trips</a></li>
                   <li><a href="#"> <i class="fa fa-tasks"></i> Plan trip</a></li>
                 </ul>
               </div>
@@ -145,7 +145,16 @@ if(isset($_GET['feature']))
             else if ($feature==='places') 
             {
               require_once 'features/places/adminController.php';
-            } else if ($feature==='faq') 
+            } else if ($feature==='events')
+            {
+                require_once 'features/events/adminController.php';
+            } else if ($feature==='cafes')
+            {
+                require_once 'features/restaurants/adminController.php';
+            } else if ($feature==='trips')
+            {
+                require_once 'features/trips/adminController.php';
+            } else if ($feature==='faq')
             {
 
               echo '<div class="box" style="height:1200px;">';
