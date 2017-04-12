@@ -54,7 +54,7 @@
                 <td><?php echo( $open_hours->N_S);?>-<?php echo( $open_hours->N_E);?></td>
             </tr>
         </table>
-        <a href='home.php?feature=places&action=editplace&id=<?php echo($place->getId());?>'>Edit</a>
+        <?php if($_SESSION['user_id']==$place->getPostedBy()):?> <a href='home.php?feature=places&action=editplace&id=<?php echo($place->getId());?>'>Edit</a><?php endif;?>
     </div>
 
     <div class="content-row">
@@ -92,8 +92,55 @@
         });
       }
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        initMap();
+        initMap();    
+        
         });
+
+        $(document).ready(loadReviews);
+        var current_user=<?php echo $_SESSION['user_id'];?>;
+        function loadReviews(){
+            $.getJSON('features/reviews/index.php',{action : 'getreviewsJSON',type: 1, id:<?php echo $place->getId();?>}, function (data) {
+                var result ="<aside><h3>Latest reviews:</h3><div class='panel-group'>";
+                //result+="<a href='features/reviews/index.php?action=addreview&id=<?php echo $place->getId();?>&type=1'>New review</a>";
+                result+="<button id='newreview' type='button'>New review</button>";
+                
+                $.each(data, function(index,review){
+                    result += "<div class='panel panel-primary'>";                 
+                    result += "<div class='panel-heading'><h4>" + review.title +"</h4><i>" + review.date + "</i>  "+"</div>";
+
+                    result += "<div class='panel-body'>" + review.description + "</div>";
+
+                    result += "<div class='panel-footer'>" ;
+                    result += "Author: <a href='index.php?feature=users&action=viewprofile&id="+review.user_id+"'><b>" + review.first_name +" " +review.last_name+"</b></a>";
+                    if(current_user==review.user_id)
+                        result += "<button type='button' name='delete' rid='"+ review.id+"'>Delete</button>";
+                    result += "</div>";
+
+                    result += "</div>";
+                });
+                result += "</div></aside>";
+
+                $('#reviews').html(result);
+
+                $('button[name=delete]').click( function(){
+                    var url='features/reviews/index.php?action=deletereview&id='+$(this).attr('rid');
+                    var r = confirm("Do you confirm this delete action?");
+                    if (r == true) {
+                        $.post(url, function (data) { });
+                        loadReviews();
+                    } else {
+                        loadReviews();
+                    }
+                   
+                });
+
+                $('#newreview').click( function(){
+                     $.get('features/reviews/index.php',{action : 'addreviewAJAX',type: 1, id:<?php echo $place->getId();?>}, function (data) {
+                            $('#reviews').html(data);
+                        });
+                });
+            });
+        }
     </script>
     <div class="row">
     <div class="col-md-12">

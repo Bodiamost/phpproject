@@ -12,14 +12,26 @@ class PlaceDAO
     public function getCategories(){
         $query ="SELECT * FROM places_categories";
         $pdostmt=$this->db->prepare($query);
+
         $pdostmt->execute();
 
         $categories=$pdostmt->fetchAll(PDO::FETCH_CLASS,"PlaceCat");
         return $categories;
     }
+
     public function getPlaces(){
         $query ="SELECT * FROM places";
         $pdostmt=$this->db->prepare($query);
+        $pdostmt->execute();
+
+        $places=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Place");
+        return $places;
+    }
+    public function getUserPlaces($user_id){
+        $query ="SELECT * FROM places WHERE posted_by=:usr;";
+        $pdostmt=$this->db->prepare($query);
+        $pdostmt->bindValue(':usr',$user_id,PDO::PARAM_STR);
+
         $pdostmt->execute();
 
         $places=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Place");
@@ -34,7 +46,32 @@ class PlaceDAO
         $places=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Place");
         return $places;
     }
-     public function getApprovedPlacesBylocation($lat,$lng,$zoom){
+
+    public function getApprovedPlacesJSON($page=0,$limit=12){
+        $query ="SELECT * FROM places p JOIN item_types i ON p.global_type=i.type_id WHERE approved=1 LIMIT ".$limit." OFFSET ".$limit*$page.";";
+
+        $pdostmt=$this->db->prepare($query);
+        $pdostmt->execute();
+
+        $places=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Place");
+        return $places;
+    }
+    public function getApprovedPlacesBylocationJSON($lat,$lng,$zoom,$page=0,$limit=12){
+        $query ="SELECT *,( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * 
+                cos( radians(   lng ) - radians(:lng) ) + sin( radians(:lat) ) * sin(radians(lat)) ) )  AS distance 
+                FROM places p JOIN item_types i ON p.global_type=i.type_id WHERE approved=1  HAVING distance < :zoom ORDER BY distance LIMIT ".$limit." OFFSET ".$limit*$page.";";
+
+        $pdostmt=$this->db->prepare($query);
+        $pdostmt->bindValue(':lat',$lat,PDO::PARAM_STR);
+        $pdostmt->bindValue(':lng',$lng,PDO::PARAM_STR);
+        $pdostmt->bindValue(':zoom',$zoom,PDO::PARAM_STR);
+        $pdostmt->execute();
+
+        $places=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Place");
+        return $places;
+    }
+
+    public function getApprovedPlacesBylocation($lat,$lng,$zoom){
         $query ="SELECT *,( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * 
                 cos( radians(   lng ) - radians(:lng) ) + sin( radians(:lat) ) * sin(radians(lat)) ) )  AS distance 
                 FROM places WHERE approved=1  HAVING distance < :zoom ORDER BY distance LIMIT 0 , 20 ";
@@ -110,9 +147,11 @@ class PlaceCat
 {
 
 }
-class Place
+class Place implements JsonSerializable
 {
     private $id;
+    private $item_title='place';
+    private $global_type='1';
     private $cat_id;
     private $title;
     private $image;
@@ -244,4 +283,27 @@ class Place
     {
         $this->verified=$value;
     }
+    public function jsonSerialize() {
+        return ['id' => $this->id,
+                'global_type' => $this->global_type,
+                'item_title' => $this->item_title,
+                'cat_id' => $this->cat_id,
+                'title' => $this->title,
+                'image' => $this->image,
+                'description' => $this->description,    
+                'contact' => $this->contact,
+                'address' => $this->address, 
+                'lat' => $this->lat,
+                'lng' => $this->lng, 
+                'working_hours' => $this->working_hours, 
+                'rating' => $this->rating,
+                'posted_by' => $this->posted_by,
+                'posted_date' => $this->posted_date,
+                'approved' => $this->approved,
+                'verified' => $this->verified];
+    }
 }
+
+/**
+* 
+*/

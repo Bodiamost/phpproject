@@ -10,6 +10,11 @@
 	$place=$placesobj->getPlace($id);
 	$open_hours=json_decode($place->getHours());
 
+	if($_SESSION['user_id']!=$place->getpostedBy())
+	{
+		echo "You do not have such permissions!";
+		return;
+	}
     $validate=new Validate();
 	$fields=$validate->getFields();
 	$fields->addField('place_title');
