@@ -1,5 +1,7 @@
 <?php 
-session_save_path('/home/users/web/b577/ipg.bohdanmostcom/cgi-bin/tmp'); 
+ini_set('session.save_path',getcwd(). '\tmp'); //for winhost
+//ini_set('session.save_path',getcwd(). '/tmp'); //for my laptop 
+ini_set('session.gc_probability', 1);
 session_start();
 $_SESSION['user_id']=1;
 $feature='home';
