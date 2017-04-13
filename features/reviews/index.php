@@ -76,10 +76,11 @@ else if ($action==='addreviewAJAX')
 				$reviewsobj->saveVisit($visit);
 				$review->visit_id=$visit->id;
 				$reviewsobj->saveReview($review);
-				header('Location: ../../home.php?feature='.$featuresdata[$type_id].'s&action=view'.$featuresdata[$type_id].'&id='.$id);
+				//header('Location: ../../home.php?feature='.$featuresdata[$type_id].'s&action=view'.$featuresdata[$type_id].'&id='.$id);
 			}
 		}
-		require_once 'views/add_reviewAJAX.php';	
+		else
+			require_once 'views/add_reviewAJAX.php';	
 	}
 	else
 		echo "<div class='box' style='height:300px;text-align: center;'><h2>No reviews yet! </h2></div>";
@@ -97,10 +98,10 @@ else if ($action==='deletereview')
 		$review=$reviewsobj->getReviewVisitById($rid);
 		if($_SESSION['user_id']!=$review->user_id) {echo "You do not have permissions for that action"; return;}
 		$reviewsobj->deleteReview($review);
-		header('Location: ../../home.php?feature='.$featuresdata[$review->item_type_id].'s&action=view'.$featuresdata[$review->item_type_id].'&id='.$review->item_id);
+		//header('Location: ../../home.php?feature='.$featuresdata[$review->item_type_id].'s&action=view'.$featuresdata[$review->item_type_id].'&id='.$review->item_id);
 	}
 	else
-		echo "<div class='box' style='height:300px;text-align: center;'><h2>No reviews yet! </h2></div>";
+		echo "<div class='box' style='height:300px;text-align: center;'><h2>Review already deleted! </h2></div>";
 	
 }
 else if ($action==='viewreviews')

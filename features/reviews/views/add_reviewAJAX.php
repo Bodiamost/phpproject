@@ -46,7 +46,7 @@
                     formdata.push({name: 'savervw', value: 'true'});
                     formdata=objectifyForm(formdata);
                     $.post('features/reviews/index.php?action=addreviewAJAX&type=<?php echo $type_id;?>&id=<?php echo $id;?>',formdata, function (data) {
-                            $('#reviews').html(data);
+                            $('#reviews').html(data);if(data==='')loadReviews();
                         });
                     
                 });
