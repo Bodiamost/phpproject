@@ -188,8 +188,8 @@
                     var url='features/reviews/index.php?action=deletereview&id='+$(this).attr('rid');
                     var r = confirm("Do you confirm this delete action?");
                     if (r == true) {
-                        $.post(url, function (data) { });
-                        loadReviews();
+                        $.post(url, function (data) {loadReviews(); });
+                        
                     } else {
                         loadReviews();
                     }
