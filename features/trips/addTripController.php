@@ -18,7 +18,6 @@
     {
         $_SESSION['tripinfo']['step'] -= 1;   
     }
-    
     if(isset($_SESSION['tripinfo']['step'])) $step=$_SESSION['tripinfo']['step']; 
     else $step=filter_input(INPUT_GET, 'step');
 
@@ -205,8 +204,8 @@
         }
         else
         {
-            var_dump($_SESSION['tripinfo']);
             require_once 'views/add_trip_final_step.php';
         }
     }
+    
 ?>
