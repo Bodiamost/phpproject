@@ -2,6 +2,7 @@
 ini_set('session.save_path',getcwd(). '\tmp'); //for winhost
 //ini_set('session.save_path',getcwd(). '/tmp'); //for my laptop 
 ini_set('session.gc_probability', 1);
+
 session_start();
 $_SESSION['user_id']=1;
 $feature='home';
@@ -9,6 +10,23 @@ $feature='home';
 if(isset($_GET['feature']))
 {
   $feature=filter_input(INPUT_GET, 'feature');
+}
+
+if ($feature==='rssfeed')
+{
+    header('Location: features/rssfeed/index.php');
+}
+if ($feature==='polls')
+{
+    header('Location: features/polls/index.php');
+}
+if ($feature==='newalbums')
+{
+    header('Location: features/new_albums_posts/album/?feature=album');
+}
+if ($feature==='posts')
+{
+    header('Location: features/new_albums_posts/posts/?feature=posts');
 }
 ?> 
 <!DOCTYPE html>
@@ -31,7 +49,6 @@ if(isset($_GET['feature']))
     <!--<link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" /><!-- FOR Chat!!!!-->
     <link rel='stylesheet' type='text/css' href='features/albums/style.css'/><!--FOR albums-->
     <link rel='stylesheet' type='text/css' href='features/places/style.css'/><!--FOR places search -->
-
     
     <script src="js/jquery.1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -70,6 +87,8 @@ if(isset($_GET['feature']))
               <ul class="dropdown-menu">
                 <li><a href="home.php">Explore</a></li>
                 <li><a href="home.php?feature=album&action=view">Albums</a></li>
+                <li><a href="home.php?feature=newalbums&action=view">NEW Albums</a></li>
+                <li><a href="home.php?feature=posts&action=view">POSTS</a></li>
                 <li><a href="home.php">Images</a></li>
               </ul>
             </li>
@@ -123,8 +142,10 @@ if(isset($_GET['feature']))
                   </li>
                   <li><a href="home.php"> <i class="fa fa-image"></i> Images</a></li>
                   <li><a href="home.php?feature=album&action=view"> <i class="fa fa-folder-open"></i> Albums</a></li>
+                    <li><a href="home.php?feature=newalbums&action=view">NEW Albums</a></li>
+                    <li><a href="home.php?feature=posts&action=view">POSTS</a></li>
                   <li><a href="home.php"> <i class="fa fa-group"></i> Communities</a></li>                  
-                  <li><a href="home.php"> <i class="fa fa-comment"></i> Polls</a></li>
+                  <li><a href="home.php/feature=polls"> <i class="fa fa-comment"></i> Polls</a></li>
                 </ul>
               </div>
             </div>
@@ -146,6 +167,7 @@ if(isset($_GET['feature']))
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="home.php"> <i class="fa fa-globe"></i> Contact us</a></li>
                   <li><a href="home.php?feature=faq"> <i class="fa fa-question-circle"></i> FAQ</a></li>
+                  <li><a href="home.php?feature=rssfeed">RSS</a></li>
                 </ul>
               </div>
             </div>

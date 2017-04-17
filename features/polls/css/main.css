@@ -1,0 +1,20 @@
+.poll
+{
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.poll_question
+{
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: blanchedalmond;
+}
+.poll-options
+{
+    margin-bottom: 20px;
+}
+.poll-option
+{
+    margin-bottom:10px ;
+}
