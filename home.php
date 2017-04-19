@@ -12,10 +12,10 @@ if(isset($_GET['feature']))
   $feature=filter_input(INPUT_GET, 'feature');
 }
 
-if ($feature==='rssfeed')
+/*if ($feature==='rssfeed')
 {
     header('Location: features/rssfeed/index.php');
-}
+}*/
 if ($feature==='polls')
 {
     header('Location: features/polls/index.php');
@@ -47,9 +47,13 @@ if ($feature==='posts')
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/buttons.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" /><!-- FOR Chat!!!!-->
+      <?php if($feature=='albums') : ?>
     <link rel='stylesheet' type='text/css' href='features/albums/style.css'/><!--FOR albums-->
+      <?php endif;?>
     <link rel='stylesheet' type='text/css' href='features/places/style.css'/><!--FOR places search -->
-    
+      <?php if($feature=='rssfeed') : ?>
+      <link rel='stylesheet' type='text/css' href='features/rssfeed/css/style.css'/>
+      <?php endif;?>
     <script src="js/jquery.1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
@@ -213,7 +217,12 @@ if ($feature==='posts')
               require_once 'features/albums/index.php';
               echo '</div>';
             }
-          else echo "Content not found";
+            else if ($feature==='rssfeed')
+            {
+                require_once 'features/rssfeed/index.php';
+            }
+
+            else echo "Content not found";
           ?>
         </div><!-- end  center posts -->
 
