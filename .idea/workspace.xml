@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="058b0d69-eae0-4d2d-8731-4e56177436da" name="Default" comment="" />
+    <list default="true" id="058b0d69-eae0-4d2d-8731-4e56177436da" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/phpproject.iml" afterPath="$PROJECT_DIR$/.idea/phpproject.iml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -223,12 +225,12 @@
       <option name="presentableId" value="Default" />
       <updated>1492408729208</updated>
       <workItem from="1492408730350" duration="6243000" />
-      <workItem from="1492617680739" duration="174000" />
+      <workItem from="1492617680739" duration="596000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6417000" />
+    <option name="totallyTimeSpent" value="6839000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1370" height="772" extended-state="0" />
