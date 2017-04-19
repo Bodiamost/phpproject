@@ -6,7 +6,7 @@
     <script type="text/javascript" src="js/faq.js" ></script>
 
 
-
+<!--comment-->
     <meta charset="utf-8" />
     <title>Slide out Content</title>
 </head>
