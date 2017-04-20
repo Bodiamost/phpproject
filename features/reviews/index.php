@@ -1,8 +1,8 @@
 <?php 
 //session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'\bmostyts\network\tmp'); //for winhost
-//session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'/mysite/5202PHP/network/tmp'); //for my laptop 
+//session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'/mysite/5202PHP/network/tmp'); //for my laptop
+session_save_path(getcwd().'/../../tmp'); //for Ipage
 session_start();
-//var_dump($review->user_id);
 //sharan
 $action=filter_input(INPUT_GET, 'action');
 $featuresdata=array(1=>'place',2=>'event',3=>'cafe',4=>'trip');

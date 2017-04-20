@@ -1,6 +1,5 @@
 <?php 
 $action=filter_input(INPUT_GET, 'action');
-
 if ($action==='getPlacesJSON')
 {
 	require_once '../../features/connect.php';
@@ -45,11 +44,10 @@ else if ($action==='viewlist')
 {
 	require_once 'features/connect.php';
 	require_once 'features/places/models/place.php';
-
 	$db=Connect::DBconnect();
 	$placesobj=new PlaceDAO($db);
-	$search_place='';	
-	
+	$search_place='';
+
 	if(isset($_POST['map_zoom']))
 	{
 		$search_place=$_POST['search_place'];

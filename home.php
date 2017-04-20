@@ -1,10 +1,11 @@
 <?php 
 //ini_set('session.save_path',getcwd(). '\tmp'); //for winhost
-//ini_set('session.save_path',getcwd(). '/tmp'); //for my laptop 
+ini_set('session.save_path',getcwd(). '/tmp'); //for my laptop
 ini_set('session.gc_probability', 1);
 
 session_start();
 $_SESSION['user_id']=1;
+$_SESSION['user_name']='Manpreet Kaur';
 $feature='home';
 //$action='view';
 if(isset($_GET['feature']))
@@ -233,7 +234,9 @@ if ($feature==='posts')
 
         <!-- right posts -->
         <div class="col-md-3">
-          <div class="box" style="height:800px;"><h1>Another Feature content</h1></div>
+          <div class="box" style="height:800px;"><h3>Check out around the world:</h3>
+            <?php require_once 'features/rssfeed/create_feed.php';?>
+          </div>
         </div><!-- end right posts -->
       </div>
     </div>
