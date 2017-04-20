@@ -14,35 +14,41 @@
                     <input type="hidden" id="lngInput" name="map_lng" value="<?php echo $_SESSION['tripinfo']['map_lng'];?>" placeholder="">
                     <input type="hidden" id="zoomInput" name="map_zoom" value="<?php echo $_SESSION['tripinfo']['map_zoom'];?>" placeholder="">
                     <input type="hidden" id="page" name="map_page" value="0" placeholder="">
+                    <?php echo $fields->getField('trip_location')->getHTML();?>
                 </div>
                 <div>
                     <label for="trip_start">Start date:</label>
-                    <input type="date" name="trip_start" value="<?php echo $_SESSION['tripinfo']['trip_start'];?>" placeholder="" required>
+                    <input type="date" name="date_start" value="<?php echo $_SESSION['tripinfo']['trip_start'];?>" placeholder="" required>
                 </div>           
                 <div>
-                    <label for="trip_end">Start date:</label>
-                    <input type="date" name="trip_end" value="<?php echo $_SESSION['tripinfo']['trip_end'];?>" placeholder="" required>
+                    <label for="trip_end">End date:</label>
+                    <input type="date" name="date_end" value="<?php echo $_SESSION['tripinfo']['trip_end'];?>" placeholder="" required>
                 </div>
+                <?php echo $fields->getField('trip_date_data')->getHTML();?>
             </fieldset>
-            <button id="tripitemssearch" type="submit" name="tripgo">Search</button>
+                <button id="tripitemssearch" class="btn btn-blue shiny" type="submit" name="tripgo">Search</button>
         </form>
     </div>
 <?php if ($step!='1') {?>
 <form id="steps_form" action="" method="post">
-    <section id="choosen_items" class="box-body row widget">
+    <section id="choosen_items" class="box-body row widget" style="overflow-x:scroll; ">
     
 
     </section>
     <input type="hidden" id="items_chosen" name="items_chosen" value="<?php if ($_SESSION['tripinfo']['step']==2) echo $_SESSION['tripinfo']['places']; if ($_SESSION['tripinfo']['step']==3) echo $_SESSION['tripinfo']['events'];if ($_SESSION['tripinfo']['step']==4) echo $_SESSION['tripinfo']['cafes'];?>" placeholder="">
     <input type="hidden" id="step" name="step" value="<?php echo $step;?>" placeholder="">
-    <button id="next" type="submit" name="nextstep">NEXT STEP</button>
-    <button id="prev" type="submit" name="prevstep">PREV STEP</button>
-    <button id="cancel" type="submit" name="cancel">cancel</button>
+    <button id="next" class="btn btn-success shiny pull-right" type="submit" name="nextstep">NEXT STEP</button>
+    <button id="prev" class="btn btn-blue shiny pull-right" type="submit" name="prevstep">PREV STEP</button>
+    <button id="cancel" class="btn btn-danger shiny" type="submit" name="cancel">cancel</button>
 </form>
+
     <section id="results" class="box-body row widget">
     
 
     </section>
+    <div id="divloading" style="text-align: center;display: none;">
+        <img src="img/spiffygif_88x88.gif">
+    </div>
 <?php };?>
     <script>
         var autocomplete;
@@ -110,7 +116,9 @@
                 result +='value="'+$(this).attr( "value" )+'"';
                 result +='>';
                 result +='<div class="widget-header">';
-                result +=$(this).find( ".widget-header" )[0].innerHTML;
+                result +=$(this).find( ".widget-header" )[0].innerHTML.split(' ')[0];
+                if ($(this).find( ".widget-header" )[0].innerHTML.split(' ')[1]!='')
+                    result +=" "+ $(this).find( ".widget-header" )[0].innerHTML.split(' ')[1];
                 result +='</div>';
                 result +='<div class="widget-content">';
                 result +=$(this).find( ".widget-content" )[0].innerHTML;
@@ -151,6 +159,7 @@
             });
 
         function loadPlaces(){
+            $('#divloading').show();
             var formdata = $('#search_form').serializeArray();
             //formdata.push({name: 'savervw', value: 'true'});
             formdata=objectifyForm(formdata);
@@ -174,10 +183,11 @@
                     document.getElementById("page").value=parseInt(document.getElementById("page").value)+1;
                     bottomreached=false;
                 }
-                else result+="No more data";
-
+                else result+="<div style='text-align: center;'>No more data</div>";
                 result += "</div>";
                 $('#results').append(result);
+
+                $('#divloading').hide();
                 displaySelection();
             });
         }

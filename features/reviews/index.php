@@ -1,5 +1,5 @@
 <?php 
-session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'\bmostyts\network\tmp'); //for winhost
+//session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'\bmostyts\network\tmp'); //for winhost
 //session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'/mysite/5202PHP/network/tmp'); //for my laptop 
 session_start();
 //var_dump($review->user_id);

@@ -83,7 +83,23 @@ class Validate
 	{
 		return $this->fields;
 	}
+    public function location($name,$value,$required = true)
+    {
+        // Get Field object
+        $field = $this->fields->getField($name) ;
+        // If not required and empty, clear errors
 
+        if (!$required && empty($value)) {
+            $field->clearErrorMessage();
+            return;
+        }
+
+        // Cheek field and set or clear error message
+        if ($required && empty($value)) {
+            $field->setErrorMessage('Location required.');
+        }
+        else {$field->clearErrorMessage(); }
+    }
 	public function text($name,$value,$required = true,$min = 1,$max = 255) 
 	{
 		// Get Field object
@@ -91,7 +107,7 @@ class Validate
 		// If not required and empty, clear errors
 
 		if (!$required && empty($value)) {
-			$field—>clearErrorMessage();
+			$field->clearErrorMessage();
 			return;
 		}
 
@@ -136,7 +152,7 @@ class Validate
 
 		// Call the pattern method
 		// to validate a phone number
-		$patten = '/^[[:digit:]]{3}-[[:digit:]]{3}-[[:digit:]]{4}$/';
+		$pattern = '/^[[:digit:]]{3}-[[:digit:]]{3}-[[:digit:]]{4}$/';
 		$message = 'Invalid phone number';
 		$this->pattern($name,$value,$pattern,$message,$required);		
 	}
@@ -197,5 +213,42 @@ class Validate
 		$message = 'Invalid domain name part';
 		$this->pattern($name,$domain,$domainPattern,$message);	
 	}
+    public function date_valid($name,$value,$required = true)
+    {
+        // Get Field object
+        $field = $this->fields->getField($name) ;
+
+        // If not required and empty, clear errors
+        if (!$required && empty($value)) {
+            $field->clearErrorMessage();
+            return;
+        }
+        // Cheek field and set or clear error message
+        if ($required && empty($value))
+        {
+            $field->setErrorMessage('Required.');
+        }
+        else {$field->clearErrorMessage(); }
+    }
+    public function start_end_date($name,$value,$value1,$required = true)
+    {
+        // Get Field object
+        $field = $this->fields->getField($name) ;
+        // If not required and empty, clear errors
+
+        if (!$required &&(empty($value)||empty($value1))) {
+            $field->clearErrorMessage();
+            return;
+        }
+
+        $date_start=DateTime::createFromFormat('Y-m-d', $value);
+        $date_end=DateTime::createFromFormat('Y-m-d', $value1);
+        // Cheek field and set or clear error message
+        if ($required && (empty($value)||empty($value1))) {
+            $field->setErrorMessage('Required.');
+        } else if ($date_end<$date_start) {
+            $field->setErrorMessage('End date not allowed to be less than start date');
+        } else {$field->clearErrorMessage(); }
+    }
 }
 ?>

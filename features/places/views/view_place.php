@@ -100,20 +100,20 @@
         var current_user=<?php echo $_SESSION['user_id'];?>;
         function loadReviews(){
             $.getJSON('features/reviews/index.php',{action : 'getreviewsJSON',type: 1, id:<?php echo $place->getId();?>}, function (data) {
-                var result ="<aside><h3>Latest reviews:</h3><div class='panel-group'>";
+                var result ="<aside><h3>Latest reviews:</h3><div class='panel-group col-md-12'>";
                 //result+="<a href='features/reviews/index.php?action=addreview&id=<?php echo $place->getId();?>&type=1'>New review</a>";
-                result+="<button id='newreview' type='button'>New review</button>";
+                result+="<button id='newreview' class='btn btn-blue shiny' type='button'>New review</button>";
                 
                 $.each(data, function(index,review){
-                    result += "<div class='panel panel-primary'>";                 
-                    result += "<div class='panel-heading'><h4>" + review.title +"</h4><i>" + review.date + "</i>  "+"</div>";
+                    result += "<div class='panel panel-primary row'>";
+                    result += "<div class='panel-heading col-md-12'><h4 class='pull-left'>" + review.title +"</h4><i class='pull-right'>" + review.date + "</i>  "+"</div>";
 
-                    result += "<div class='panel-body'>" + review.description + "</div>";
+                    result += "<div class='panel-body  col-md-12'>" + review.description + "</div>";
 
-                    result += "<div class='panel-footer'>" ;
+                    result += "<div class='panel-footer  col-md-12'>" ;
                     result += "Author: <a href='index.php?feature=users&action=viewprofile&id="+review.user_id+"'><b>" + review.first_name +" " +review.last_name+"</b></a>";
                     if(current_user==review.user_id)
-                        result += "<button type='button' name='delete' rid='"+ review.id+"'>Delete</button>";
+                        result += "<button type='button' class='btn btn-xs btn-danger shiny pull-right' name='delete' rid='"+ review.id+"'>Delete</button>";
                     result += "</div>";
 
                     result += "</div>";
