@@ -25,10 +25,11 @@ if ($feature==='newalbums')
 {
     header('Location: features/new_albums_posts/album/?feature=album');
 }
+/*
 if ($feature==='posts')
 {
     header('Location: features/new_albums_posts/posts/?feature=posts');
-}
+}*/
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +52,7 @@ if ($feature==='posts')
       <?php if($feature=='chat') : ?>
           <link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" />
       <?php endif;?>
-      <?php if($feature=='albums') : ?>
+      <?php if($feature=='album') : ?>
         <link rel='stylesheet' type='text/css' href='features/albums/style.css'/><!--FOR albums-->
       <?php endif;?>
       <?php if($feature=='rssfeed') : ?>
@@ -134,7 +135,7 @@ if ($feature==='posts')
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
-                  <li class="active"><a href="#"> <i class="fa fa-user"></i> News feed</a></li>
+                  <li class="active"><a href="home.php?feature=posts&action=view"> <i class="fa fa-user"></i> News feed</a></li>
                   <li>
                     <a href="home.php?feature=chat"> 
                       <i class="fa fa-envelope"></i> Messages 
@@ -149,8 +150,6 @@ if ($feature==='posts')
                   </li>
                   <li><a href="home.php"> <i class="fa fa-image"></i> Images</a></li>
                   <li><a href="home.php?feature=album&action=view"> <i class="fa fa-folder-open"></i> Albums</a></li>
-                    <li><a href="home.php?feature=newalbums&action=view">NEW Albums</a></li>
-                    <li><a href="home.php?feature=posts&action=view">POSTS</a></li>
                   <li><a href="home.php"> <i class="fa fa-group"></i> Communities</a></li>                  
                   <li><a href="home.php/feature=polls"> <i class="fa fa-comment"></i> Polls</a></li>
                 </ul>
@@ -172,7 +171,7 @@ if ($feature==='posts')
             <div class="widget">
               <div class="widget-body">
                 <ul class="nav nav-pills nav-stacked">
-                  <li><a href="home.php"> <i class="fa fa-globe"></i> Contact us</a></li>
+                  <li><a href="features/Contact_form/indexnew.php"> <i class="fa fa-globe"></i> Contact us</a></li>
                   <li><a href="home.php?feature=faq"> <i class="fa fa-question-circle"></i> FAQ</a></li>
                   <li><a href="home.php?feature=rssfeed">RSS</a></li>
                 </ul>
@@ -219,6 +218,10 @@ if ($feature==='posts')
               echo '<div class="box" style="height:1600px;">';
               require_once 'features/albums/index.php';
               echo '</div>';
+            }
+            else if ($feature==='posts')
+            {
+                require_once 'features/posts/timeline.php';
             }
             else if ($feature==='rssfeed')
             {

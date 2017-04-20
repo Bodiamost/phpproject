@@ -8,7 +8,7 @@
 
 
 
-require_once "features/connect.php";//require_once "connect.php"; 
+require_once "connect.php";
 require_once "uploadpic.php";
 //require_once "showalbum.php";
 $db=connect::dbConnect();
@@ -24,37 +24,37 @@ $albms=$pdostmt->fetchAll(PDO::FETCH_ASSOC);
 
 if(isset($_POST['addpic']))
 {
-  $name=$_POST['name'];
-  $albm_id=$_POST['albums'];
-  $file=$_FILES['pic']['name'];
-  $file_type=$_FILES['pic']['type'];
-  $file_size=$_FILES['pic']['size'];
-  $file_tmp=$_FILES['pic']['tmp_name'];
+    $name=$_POST['name'];
+    $albm_id=$_POST['albums'];
+    $file=$_FILES['pic']['name'];
+    $file_type=$_FILES['pic']['type'];
+    $file_size=$_FILES['pic']['size'];
+    $file_tmp=$_FILES['pic']['tmp_name'];
 
-  $random_name=rand();
+    $random_name=rand();
 
 
-  if(empty($name) or empty($file))
-  {
-      echo "Please fill all the fields<br/>";
-  }
-  else
-  {
-     // echo "Its working!!<br/>";
-      $upic=new uploadpic();
-      $upic->addPic($name,$albm_id,$random_name,$file_tmp);
-      echo "File uploaded";
+    if(empty($name) or empty($file))
+    {
+        echo "Please fill all the fields<br/>";
+    }
+    else
+    {
+        // echo "Its working!!<br/>";
+        $upic=new uploadpic();
+        $upic->addPic($name,$albm_id,$random_name,$file_tmp);
+        echo "File uploaded";
 
-  }
+    }
 
 }
-
+echo '<div class="box">';
 include "title_bar.php";
 
 echo"
 
 <h3>Create Album</h3>
-<form method='post' enctype='multipart/form-data' class='form-control' >
+<form method='post' class='box-body' enctype='multipart/form-data' class='form-control' >
 <b>Name:</b><input type='text' name='name'/>
 <br/><br/>
 Select Album:
@@ -76,6 +76,7 @@ Select Photo:
 </form>
 
 ";
+echo '</div>';
 /**
  * Created by PhpStorm.
  * User: Sharanjeet Kaur

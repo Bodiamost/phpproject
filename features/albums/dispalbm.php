@@ -1,40 +1,32 @@
 <?php
-require_once "features/connect.php";//require_once "connect.php";
+require_once "connect.php";
 require_once "showalbum.php";
 $shwalbm=new showalbum();
 $results=$shwalbm->viewalbms();
 //var_dump($results);
 ?>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-</head>
-<body>
-<!--<a href="index.php?feature=amadd">Create a New Album</a>-->
-<a href="home.php?feature=album&action=amadd">Create a New Album</a>
 
-<?php
-
-    echo " <table class='viewalbm'>  <tr>";
-    global $results;
-    foreach ($results as $pic)
-    {
-      /*  echo "
-
-       
-            <td><img src='album_covers/".$pic['cover_photo']."' width='200px' height='200px'/><br/><a href='index.php?id=".$pic['id']."&amp;feature=pics'>".$pic['name']."</a><br/>
-            <h3>Album Description</h3>".$pic['description']."</td>
-         ";*/
-         echo "
-
-       
-            <td><img src='features/albums/album_covers/".$pic['cover_photo']."' width='200px' height='200px'/><br/><a href='home.php?id=".$pic['id']."&amp;feature=album&action=pics'>".$pic['name']."</a><br/>
-            <h3>Album Description</h3>".$pic['description']."</td>
-         ";
-    }
-    echo "</tr></table>";
+<div class="box">
+    <h1 class="box-header">Albums</h1>
+    <div class="box-body row widget">
+        <?php $i = 0;foreach ($results as $albm) {?>
 
 
-?>
-</body>
-</html>
+        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+            <div class="widget-header">
+                <a href="home.php?id=<?php echo $albm['id'];?> &amp; feature=album&action=pics"><?php echo $albm['name'];?> </a><br/>
+            </div>
+            <div class="widget-content">
+
+                <img src=<?php echo "features/albums/album_covers/".$albm['cover_photo'];?> width='100%' height="150px"/><br/>
+
+            </div>
+
+        </div>
+        <?php if(++$i % 2 === 0):?> </div><div  class="box-body row widget"><?php endif;?>
+        <?php };?>
+    </div>
+    <div class="box-footer">
+        <a href="home.php?feature=album&action=amadd">Add new Album</a>
+    </div>
+</div>

@@ -8,7 +8,7 @@
 
 
 
-require_once "features/connect.php";//require_once "connect.php";
+require_once "connect.php";
 require_once  "Albumadd.php";
 $albm=new Albumadd();
 
@@ -42,7 +42,7 @@ if(isset($_POST['add']))
 
 }
 
-
+echo '<div class="box" >';
 
 include "title_bar.php";
 echo"
@@ -51,13 +51,13 @@ echo"
 <h3>Create Album</h3>
 <form method='post' enctype='multipart/form-data' >
 Album Name:
-<input type='text' id='al_name' name='al_name'/>
+<input type='text' id='al_name' name='al_name' required/>
 <br/><br/>
-Description:<textarea name='desc' cols='5' width='200px'></textarea>
+Description:<textarea name='desc' cols='5' width='200px' required></textarea>
 <br/><br/>
-Date: <input type='date' name='credate'/>
+Date: <input type='date' name='credate' required/>
 <br/><br/>
-Cover Photo:<input type='file' name='covrpic'/>
+Cover Photo:<input type='file' name='covrpic' required/>
 <br/><br/>
 <input type='submit' name='add' value='Create'/>
 </form>
@@ -66,3 +66,4 @@ Cover Photo:<input type='file' name='covrpic'/>
 
 
 ";
+echo '</div>';

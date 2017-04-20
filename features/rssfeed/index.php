@@ -1,4 +1,13 @@
+<!--HHHH-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>News Feed</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
 
+<body>
     <div class="container">
         <div class="header">
             <img src="images/heade.jpg" width="440px" height="100px"/>
@@ -11,3 +20,5 @@
             Powered by <a href="http://www.Bohdanmost.com/network">Network.com</a>
         </div>
     </div>
+</body>
+</html>
