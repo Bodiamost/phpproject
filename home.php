@@ -28,6 +28,10 @@ if ($feature==='posts')
 {
     header('Location: features/new_albums_posts/posts/?feature=posts');
 }
+if ($feature==='contact')
+{
+    header('Location: features/Contact_form/indexnew.php');
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -158,6 +162,7 @@ if ($feature==='posts')
                   <li><a href="home.php?feature=cafes&action=viewlist"> <i class="fa fa-glass"></i> Restaurants</a></li>
                   <li><a href="home.php?feature=trips&action=viewlist"> <i class="fa fa-car"></i> Trips</a></li>  
                   <li><a href="home.php?feature=trips&action=new_trip"> <i class="fa fa-tasks"></i> Plan your trip</a></li>
+                  <li><a href="home.php?feature=trips&action=new_trip"> <i class="fa fa-tasks"></i> Plan your trip</a></li>
                 </ul>
               </div>
             </div>
@@ -165,7 +170,7 @@ if ($feature==='posts')
             <div class="widget">
               <div class="widget-body">
                 <ul class="nav nav-pills nav-stacked">
-                  <li><a href="home.php"> <i class="fa fa-globe"></i> Contact us</a></li>
+                  <li><a href="features/Contact_form/indexnew.php"> <i class="fa fa-globe"></i> Contact us</a></li>
                   <li><a href="home.php?feature=faq"> <i class="fa fa-question-circle"></i> FAQ</a></li>
                   <li><a href="home.php?feature=rssfeed">RSS</a></li>
                 </ul>
@@ -222,7 +227,12 @@ if ($feature==='posts')
 
         <!-- right posts -->
         <div class="col-md-3">
-          <div class="box" style="height:800px;"><h1>Another Feature content</h1></div>
+          <div class="box" style="height:800px;">
+              <h1>Happening around the world</h1>
+              <p>
+              <a href="features/rssfeed/index.php"> <i class="fa fa-question-circle"></i> Read Here..</a></li>
+              </p>
+          </div>
         </div><!-- end right posts -->
       </div>
     </div>
