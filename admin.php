@@ -91,8 +91,8 @@ if(isset($_GET['feature']))
 
                 <ul class="nav nav-pills nav-stacked">                 
                   <li>
-                    <a href="#"> 
-                      <i class="fa fa-users"></i> Users
+                    <a href="admin.php?feature=dashboard">
+                      <i class="fa fa-users"></i> Dashboard
                       <span class="label label-info pull-right r-activity">10</span>
                     </a>
                   </li>
@@ -160,6 +160,9 @@ if(isset($_GET['feature']))
               echo '<div class="box" style="height:1200px;">';
               require_once 'features/faq/listfaq.php';
               echo "</div>";
+            }else if ($feature==='dashboard')
+            {
+                require_once 'features/chartsgoogle/googlechart.php';
             }
           else echo "Content not found";
           ?>

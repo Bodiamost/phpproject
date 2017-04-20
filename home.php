@@ -16,7 +16,7 @@ if(isset($_GET['feature']))
 /*if ($feature==='rssfeed')
 {
     header('Location: features/rssfeed/index.php');
-}*/
+}
 if ($feature==='polls')
 {
     header('Location: features/polls/index.php');
@@ -25,7 +25,6 @@ if ($feature==='newalbums')
 {
     header('Location: features/new_albums_posts/album/?feature=album');
 }
-/*
 if ($feature==='posts')
 {
     header('Location: features/new_albums_posts/posts/?feature=posts');
@@ -151,7 +150,7 @@ if ($feature==='posts')
                   <li><a href="home.php"> <i class="fa fa-image"></i> Images</a></li>
                   <li><a href="home.php?feature=album&action=view"> <i class="fa fa-folder-open"></i> Albums</a></li>
                   <li><a href="home.php"> <i class="fa fa-group"></i> Communities</a></li>                  
-                  <li><a href="home.php/feature=polls"> <i class="fa fa-comment"></i> Polls</a></li>
+                  <li><a href="home.php?feature=poll_system"> <i class="fa fa-comment"></i> Polls</a></li>
                 </ul>
               </div>
             </div>
@@ -209,7 +208,7 @@ if ($feature==='posts')
       	    }
             else if ($feature==='chat') 
             {
-              echo '<div class="box" style="height:600px;">';
+              echo '<div class="box" style="min-height:700px;">';
               require_once 'features/chat/chatindex.php';
               echo '</div>';
             }
@@ -226,6 +225,10 @@ if ($feature==='posts')
             else if ($feature==='rssfeed')
             {
                 require_once 'features/rssfeed/index.php';
+            }
+            else if ($feature==='poll_system')
+            {
+                require_once 'features/pollsystem/index.php';
             }
 
             else echo "Content not found";

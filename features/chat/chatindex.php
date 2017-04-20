@@ -90,14 +90,14 @@ $(document).ready(function() {
 </script>
 <div id="chatwrapper">
 <!--display-->
-
+<h1>Connect to the world:</h1>
 <div id="messages"></div>
 <!--post-->
 <form id="userArea">
 <div id="usercolor">
 <!--<input type="text" name="user" placeholder="Type Your Nick" required="required" value="" id="text" style="margin-bottom: 5px;" />
 <input name="text" class="color" id="text" maxlength="6" value="000000" />-->
-<input type="text" name="user" placeholder="Type Your Nick" required="required" value="" id="text" style="width:120px;margin-bottom: 5px;" />
+<input type="text" name="user" placeholder="Type Your Nick" required="required" value="Manpreet" id="text" style="width:120px;margin-bottom: 5px;" />
 <input name="text" class="color" style="width:120px;} id="text" maxlength="6" value="000000" />
 </div>
 <div id="messagesntry">
