@@ -6,8 +6,8 @@
     <!--
     rssfeed_url = new Array();
     rssfeed_url[0]="http://rss.cbc.ca/lineup/topstories.xml";
-    rssfeed_frame_width="600";
-    rssfeed_frame_height="500";
+    rssfeed_frame_width="250";
+    rssfeed_frame_height="600";
     rssfeed_scroll="off";
     rssfeed_scroll_step="5";
     rssfeed_scroll_bar="on";

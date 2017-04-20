@@ -1,4 +1,5 @@
 <?php
+
 class Connect
 {
    /* private static $hostname='localhost';
@@ -49,3 +50,4 @@ class Connect
         return self::$db;
     }
 }
+?>
