@@ -58,11 +58,12 @@
 
             var conteiner   = '<h3>Places</h3>';
             conteiner     += "<div id='places' class='row'>";
+            conteiner += '<div id="divloading1" style="text-align: center;display: none;"><img src="img/spiffygif_88x88.gif"></div>';
             conteiner += "</div>";
             $('#desc').append(conteiner); 
             $.each(tripitems['places'],function (index,it){
                // console.log(it);
-                
+                $('#divloading1').show();
                 $.post('features/places/index.php?action=getPlaceJSON&id='+it, function (itemdata) {
                     
                     var result='';
@@ -81,17 +82,19 @@
                         result +='</div></a>';
                     }
                     else result+="Smth wrong with this place";
-                     $('#places').append(result); 
+                     $('#places').append(result);
+                    $('#divloading1').hide();
                 });  
             });
 
             conteiner   = '<h3>Events</h3>';
             conteiner     += "<div id='events' class='row'>";
+            conteiner += '<div id="divloading2" style="text-align: center;display: none;"><img src="img/spiffygif_88x88.gif"></div>';
             conteiner += "</div>";
             $('#desc').append(conteiner); 
             $.each(tripitems['events'],function (index,it){
                // console.log(it);
-                
+                $('#divloading2').show();
                 $.post('features/events/index.php?action=getEventJSON&id='+it, function (itemdata) {
                     
                     var result='';
@@ -110,17 +113,19 @@
                         result +='</div></a>';
                     }
                     else result+="Smth wrong with this place";
-                     $('#events').append(result); 
+                     $('#events').append(result);
+                    $('#divloading2').hide();
                 });  
             });
             
             conteiner   = '<h3>Restaurants</h3>';
             conteiner   += "<div id='cafes' class='row'>";
+            conteiner += '<div id="divloading3" style="text-align: center;display: none;"><img src="img/spiffygif_88x88.gif"></div>';
             conteiner += "</div>";
             $('#desc').append(conteiner); 
             $.each(tripitems['cafes'],function (index,it){
                // console.log(it);
-                
+                $('#divloading3').show();
                 $.post('features/restaurants/index.php?action=getCafeJSON&id='+it, function (itemdata) {
                     
                     var result='';
@@ -139,7 +144,8 @@
                         result +='</div></a>';
                     }
                     else result+="Smth wrong with this place";
-                     $('#cafes').append(result); 
+                     $('#cafes').append(result);
+                    $('#divloading3').hide();
                 });  
             });
         }
@@ -162,20 +168,20 @@
         $(document).ready(loadReviews);
         function loadReviews(){
             $.getJSON('features/reviews/index.php',{action : 'getreviewsJSON',type: 4, id:<?php echo $trip->getId();?>}, function (data) {
-                var result ="<aside><h3>Latest reviews:</h3><div class='panel-group'>";
+                var result ="<aside><h3>Latest reviews:</h3><div class='panel-group  col-md-12'>";
                 //result+="<a href='features/reviews/index.php?action=addreview&id=<?php echo $trip->getId();?>&type=1'>New review</a>";
-                result+="<button id='newreview' type='button'>New review</button>";
+                result+="<button id='newreview' class='btn btn-blue shiny' type='button'>New review</button>";
                 
                 $.each(data, function(index,review){
-                    result += "<div class='panel panel-primary'>";                 
-                    result += "<div class='panel-heading'><h4>" + review.title +"</h4><i>" + review.date + "</i>  "+"</div>";
+                    result += "<div class='panel panel-primary row'>";
+                    result += "<div class='panel-heading col-md-12'><h4 class='pull-left'>" + review.title +"</h4><i class='pull-right'>" + review.date + "</i>  "+"</div>";
 
-                    result += "<div class='panel-body'>" + review.description + "</div>";
+                    result += "<div class='panel-body col-md-12'>" + review.description + "</div>";
 
-                    result += "<div class='panel-footer'>" ;
+                    result += "<div class='panel-footer col-md-12'>" ;
                     result += "Author: <a href='index.php?feature=users&action=viewprofile&id="+review.user_id+"'><b>" + review.first_name +" " +review.last_name+"</b></a>";
                     if(current_user==review.user_id)  
-                        result += "<button type='button' name='delete' rid='"+ review.id+"'>Delete</button>";
+                        result += "<button type='button' class='btn btn-xs btn-danger shiny pull-right' name='delete' rid='"+ review.id+"'>Delete</button>";
                     result += "</div>";
 
                     result += "</div>";

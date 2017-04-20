@@ -1,5 +1,5 @@
 <?php 
-ini_set('session.save_path',getcwd(). '\tmp'); //for winhost
+//ini_set('session.save_path',getcwd(). '\tmp'); //for winhost
 //ini_set('session.save_path',getcwd(). '/tmp'); //for my laptop 
 ini_set('session.gc_probability', 1);
 
@@ -46,13 +46,15 @@ if ($feature==='posts')
     <link href="css/cover.css" rel="stylesheet">
     <link href="css/forms.css" rel="stylesheet">
     <link href="css/buttons.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" /><!-- FOR Chat!!!!-->
-      <?php if($feature=='albums') : ?>
-    <link rel='stylesheet' type='text/css' href='features/albums/style.css'/><!--FOR albums-->
+    <link rel='stylesheet' type='text/css' href='css/styleForSearch.css'/><!--FOR location search -->
+      <?php if($feature=='chat') : ?>
+          <link rel="stylesheet" href="features/chat/style.css" type="text/css" media="screen" />
       <?php endif;?>
-    <link rel='stylesheet' type='text/css' href='features/places/style.css'/><!--FOR places search -->
+      <?php if($feature=='albums') : ?>
+        <link rel='stylesheet' type='text/css' href='features/albums/style.css'/><!--FOR albums-->
+      <?php endif;?>
       <?php if($feature=='rssfeed') : ?>
-      <link rel='stylesheet' type='text/css' href='features/rssfeed/css/style.css'/>
+        <link rel='stylesheet' type='text/css' href='features/rssfeed/css/style.css'/>
       <?php endif;?>
     <script src="js/jquery.1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

@@ -6,6 +6,13 @@
 
     $step=0;
 
+    $validate=new Validate();
+    $fields=$validate->getFields();
+    $fields->addField('trip_date_data');
+    $fields->addField('trip_location');
+    if(isset($_POST['tripgo']))
+    {
+    }
     if(isset($_POST['cancel']))
     {
         $_SESSION['tripinfo']['step'] = 1; 
@@ -38,21 +45,33 @@
 	}
 	if ($step===1)
     {
-    	if (isset($_POST['tripgo']))
-    	{
-            $_SESSION['tripinfo']['step'] = 2;
-            $step=2;
-    		$_SESSION['tripinfo']['search_place'] = $_POST['search_place'];
-    		$_SESSION['tripinfo']['map_lat'] = $_POST['map_lat'];
-    		$_SESSION['tripinfo']['map_lng'] = $_POST['map_lng'];
-    		$_SESSION['tripinfo']['map_zoom'] = $_POST['map_zoom'];
-    		$_SESSION['tripinfo']['trip_start'] = $_POST['trip_start'];
-    		$_SESSION['tripinfo']['trip_end'] = $_POST['trip_end'];
 
-            //header('Location: home.php?feature=trips&action=new_trip&step=2');
-            $ajaxdatafeature='place';
-            $ajaxdataaction='Place';
-            require_once 'views/create_trip.php';
+    	if (isset($_POST['tripgo']))
+        {
+            $_SESSION['tripinfo']['search_place'] = $_POST['search_place'];
+            $_SESSION['tripinfo']['map_lat'] = $_POST['map_lat'];
+            $_SESSION['tripinfo']['map_lng'] = $_POST['map_lng'];
+            $_SESSION['tripinfo']['map_zoom'] = $_POST['map_zoom'];
+            $_SESSION['tripinfo']['trip_start'] = $_POST['date_start'];
+            $_SESSION['tripinfo']['trip_end'] = $_POST['date_end'];
+
+            $validate->start_end_date('trip_date_data',$_POST['date_start'],$_POST['date_end']);
+            $validate->location('trip_location',$_POST['map_lat']);
+
+            if($fields->hasErrors())
+            {
+                require_once 'views/create_trip.php';
+                return;
+            }
+            else
+            {
+                $_SESSION['tripinfo']['step'] = 2;
+                $step=2;
+                $ajaxdatafeature='place';
+                $ajaxdataaction='Place';
+                require_once 'views/create_trip.php';
+            }
+
     	}
     	else
     		require_once 'views/create_trip.php';

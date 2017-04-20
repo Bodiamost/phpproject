@@ -2,16 +2,27 @@
 	<h1 class="box-header">Events</h1>
 
 
-    <div style="height:40px;">
+    <div >
         <form id="search_form" action="" method="post">
-            <input id="pac-input" name="search_place"  type="text" value="<?php echo $search_place;?>" placeholder="Enter a location">
+            <input id="pac-input" name="search_place"  type="text" value="<?php echo $search_place;?>" placeholder="Enter a location" >
             <fieldset>
                 <div>
-                    <input type="hidden" id="latInput" name="map_lat" value="" placeholder="">
-                    <input type="hidden" id="lngInput" name="map_lng" value="" placeholder="">
-                    <input type="hidden" id="zoomInput" name="map_zoom" value="" placeholder="">
+                    <input type="hidden" id="latInput" name="map_lat" value="<?php echo $lat;?>" placeholder="">
+                    <input type="hidden" id="lngInput" name="map_lng" value="<?php echo $lng;?>" placeholder="">
+                    <input type="hidden" id="zoomInput" name="map_zoom" value="<?php echo $zoom;?>" placeholder="">
                 </div>
+                <?php echo $fields->getField('event_location')->getHTML();?>
+                <div>
+                    <label for="trip_start">Start date:</label>
+                    <input type="date" name="date_start" value="<?php echo $start_date_beg;?>" placeholder="" required>
+                </div>
+                <div>
+                    <label for="trip_end">End date:</label>
+                    <input type="date" name="date_end" value="<?php echo $start_date_end;?>" placeholder="" required>
+                </div>
+                <?php echo $fields->getField('event_date_se')->getHTML();?>
             </fieldset>
+            <button id="search" class="btn btn-blue shiny" type="submit" name="search">Search</button>
         </form>
     </div>
 
@@ -66,6 +77,7 @@
                   }
                 });   
         autocomplete.addListener('place_changed', fillInAddress);
+        fillInAddress();
       }
 
       function fillInAddress() {
@@ -79,9 +91,8 @@
         var point2=new google.maps.LatLng(place.geometry.viewport.f.b,place.geometry.viewport.b.b);
          
         document.getElementById("zoomInput").value = google.maps.geometry.spherical.computeDistanceBetween(point1,point2)/2;
-        $( "#search_form" ).submit();
+        $( "#search" ).click();
       }
-      
     </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrv18VtDMOUV9l_DNUogXpN3xc96kFWks&libraries=geometry,places&callback=initAutocomplete">
