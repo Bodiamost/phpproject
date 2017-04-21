@@ -1,10 +1,10 @@
 <?php
 require_once 'features/connect.php';
 class Poll{
-    private $dbHost  = 'localhost';
-    private $dbUser  = 'root';
-    private $dbPwd   = '';
-    private $dbName  = 'poll_system';            
+    private $dbHost  = 'network.cga94bd83uty.ca-central-1.rds.amazonaws.com:3306';
+    private $dbUser  = 'teammember';
+    private $dbPwd   = 'phpteam1!';
+    private $dbName  = 'network';
     private $db      = false;
     private $pollTbl = 'polls';
     private $optTbl  = 'poll_options';
@@ -12,8 +12,8 @@ class Poll{
     
     public function __construct(){
         if(!$this->db){ 
-            // Connect to the database
-            /*$conn = new mysqli($this->dbHost, $this->dbUser, $this->dbPwd, $this->dbName);
+           /* // Connect to the database
+            $conn = new mysqli($this->dbHost, $this->dbUser, $this->dbPwd, $this->dbName);
             if($conn->connect_error){
                 die("Failed to connect with MySQL: " . $conn->connect_error);
             }else{
@@ -29,9 +29,8 @@ class Poll{
      * @param string count, single, all
      */
     private function getQuery($sql,$returnType = ''){
-        $data = '';
+        $data=array();
         $result = $this->db->query($sql);
-
 
         if($result){
             switch($returnType){
@@ -41,6 +40,7 @@ class Poll{
                 case 'single':
                     $i=0;
                     while($row = $result->fetch_assoc()) {
+
                         $data[$i] = $row;
                         $i++;
                     }
@@ -65,7 +65,6 @@ class Poll{
         $pollData = array();
         $sql = "SELECT * FROM ".$this->pollTbl." WHERE status = '1' ORDER BY created DESC";
         $pollResults = $this->getQuery($sql, $pollType);
-
 
         $k = 0;
         foreach($pollResults as $pollResult) {

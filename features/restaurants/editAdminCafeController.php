@@ -68,8 +68,8 @@
 		{
 			$targetDir = "features/restaurants/images/";
 			$targetName = uniqid("cafe");
-			require_once '../imageUploadHelper.php';
-			$smg = uploadImage($targetDir,$targetName);
+			require_once 'features/imageUploadHelper.php';
+			$smg = uploadImage($targetDir,$targetName,"cafe");
 			echo $smg;
 			$cafe->setImage($targetDir.$targetName);
 		}

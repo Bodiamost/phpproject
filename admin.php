@@ -158,7 +158,7 @@ if(isset($_GET['feature']))
             {
 
               echo '<div class="box" style="height:1200px;">';
-              require_once 'features/faq/listfaq.php';
+              require_once 'features/community/listfaq.php';
               echo "</div>";
             }else if ($feature==='dashboard')
             {

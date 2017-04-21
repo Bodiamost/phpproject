@@ -62,8 +62,8 @@
 		{
 			$targetDir = "features/events/images/";
 			$targetName = uniqid("event");
-			require_once '../imageUploadHelper.php';
-			$smg = uploadImage($targetDir,$targetName);
+			require_once 'features/imageUploadHelper.php';
+			$smg = uploadImage($targetDir,$targetName,"event");
 			echo $smg;
 			$event->setImage($targetDir.$targetName);
 		}

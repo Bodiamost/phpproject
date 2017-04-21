@@ -12,7 +12,7 @@ class reviewDAO
     public function getReviews($item_type,$id)
     {
         $query ="SELECT r.id, r.title,r.date,r.description,u.first_name,u.last_name,r.rating,v.user_id
-        		FROM reviews r, visits v, users u WHERE v.item_type_id=:i_t_id AND v.item_id=:i_id 
+        		FROM reviews r, visits v, usertb u WHERE v.item_type_id=:i_t_id AND v.item_id=:i_id 
         		AND r.visit_id=v.id AND r.visit_id=v.id AND v.user_id=u.id ORDER BY r.date DESC;";
         $pdostmt=$this->db->prepare($query);
         $pdostmt->bindValue(':i_t_id',$item_type,PDO::PARAM_STR);
