@@ -1,5 +1,5 @@
 <?php
-require_once "features/connect.php";//require_once "connect.php";
+require_once "connect.php";
 require_once "showpics.php";
 
 
@@ -17,40 +17,37 @@ $shwpics=$pics->viewpics($a_id);
 
 ?>
 
+<div class="box">
 
-<h3>Your Images in this Album are</h3>
-<!--<h2><a href="album.php?feature=amadd">Create a New Album</a></h2>-->
-<h2><a href="home.php?feature=album&action=amadd">Create a New Album</a></h2>
-<br/>
-    <?php
-    global $shwpics;
-    //echo "<table>";
-    foreach ($shwpics as $spic)
-    {
+    <h3>Your Images in this Album are</h3>
+    <h2><a href="home.php?feature=album&action=amadd">Create a New Album</a></h2>
+    <br/>
 
-        //echo "<tr>";
-        //for($i=0;$i<2;$i++)
-        //{
-      /*  echo "
-        
+    <link rel="stylesheet" href="features/albums/css/lightbox.min.css"/>
+    <script type="text/javascript" src="features/albums/js/lightbox.min.js"></script>
 
-      <img src='uploads/".$spic['imgurl']."' width='275px' height='275px' class='disimg'/>
-      
-      
-      
-      ";*/
-        echo "
-        
+    <div class="box-body row widget">
+        <?php
+        global $shwpics;
+        //echo "<table>";
+        $i=0;
+        foreach ($shwpics as $spic)
+        {?>
 
-      <img src='features/albums/uploads/".$spic['imgurl']."' width='275px' height='275px' class='disimg'/>
-      
-      
-      
-      ";
-        }
-        //cho "</tr>";
-    //}
-    //echo "</tr></table>";
 
-    ?>
+        <div class="col-lg-6 col-md-6 col-sm-6 no-padding">
 
+            <div class="widget-content">
+
+                <a href=<?php echo "features/albums/uploads/".$spic['imgurl'];?>  data-title=<?php echo $spic['name'];?> data-lightbox="samebox">
+                    <img src=<?php echo "features/albums/uploads/".$spic['imgurl'];?> width='100%' height="150px" class="img-rounded"/>
+                </a>
+                <p><?php echo $spic['name'];?></p>
+
+            </div>
+
+        </div>
+        <?php if(++$i % 2 === 0):?> </div><div  class="box-body row widget"><?php endif;?>
+        <?php };?>
+    </div>
+</div>

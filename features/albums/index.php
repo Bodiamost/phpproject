@@ -1,5 +1,5 @@
 <?php 
-$action='view';
+//$action='view';
 if(isset($_GET['action']))
 {
   $action=filter_input(INPUT_GET, 'action');

@@ -1,1 +1,1 @@
-<?php require_once 'features/users/index.php';?>
+<?php header('Location: features/log_signup/index.php');?>

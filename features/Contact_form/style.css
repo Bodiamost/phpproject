@@ -1,0 +1,120 @@
+#contact
+{
+    width:320px;
+    padding:20px;
+    border:1px solid #ccc;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#contact legend, h2
+{
+    font-family : Arial, sans-serif;
+    font-size: 1.3em;
+    font-weight:bold;
+    color:#333;
+}
+
+#contact label
+{
+    font-family : Arial, sans-serif;
+    font-size:0.8em;
+    font-weight: bold;
+}
+
+#contact input[type="text"],textarea
+{
+    font-family : Arial, Verdana, sans-serif;
+    font-size: 0.8em;
+    line-height:140%;
+    color : #000;
+    padding : 3px;
+    border : 1px solid #999;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#contact input[type="text"]
+{
+    height:18px;
+    width:220px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#contact input[type="email"], textarea
+{
+    ont-family : Arial, Verdana, sans-serif;
+    font-size: 0.8em;
+    height:18px;
+    width:220px;
+    line-height:140%;
+    color : #000;
+    padding : 3px;
+    border : 1px solid #999;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#contact #scaptcha
+{
+    width:60px;
+    height:18px;
+}
+
+#contact input[type="submit"]
+{
+    width:100px;
+    height:30px;
+    padding-left:0px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#contact textarea
+{
+    height:120px;
+    width:310px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+#contact input[type="text"]:focus,textarea:focus
+{
+    color : #009;
+    border : 1px solid #990000;
+    background-color : #ffff99;
+    font-weight:bold;
+}
+
+#contact input[type="email"]:focus,textarea:focus
+{
+    color : #009;
+    border : 1px solid #990000;
+    background-color : #ffff99;
+    font-weight:bold;
+}
+
+#contact .container
+{
+    margin-top:8px;
+    margin-bottom: 10px;
+}
+
+#contact .error
+{
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.7em;
+    color: #900;
+    background-color : #ffff00;
+}
+

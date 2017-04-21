@@ -6,7 +6,7 @@
     <!--
     rssfeed_url = new Array();
     rssfeed_url[0]="http://rss.cbc.ca/lineup/topstories.xml";
-    rssfeed_frame_width="250";
+    rssfeed_frame_width="99%";
     rssfeed_frame_height="600";
     rssfeed_scroll="off";
     rssfeed_scroll_step="5";
@@ -18,7 +18,7 @@
     rssfeed_css_url="http://feed.surfing-waves.com/css/style6.css";
     rssfeed_title="on";
     rssfeed_title_name="Something to Know";
-    rssfeed_title_bgcolor="#000";
+    rssfeed_title_bgcolor="#2dc3e8";
     rssfeed_title_color="#fff";
     rssfeed_title_bgimage="http://";
     rssfeed_footer="off";
