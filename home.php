@@ -4,8 +4,8 @@ ini_set('session.save_path',getcwd(). '/tmp'); //for my laptop
 ini_set('session.gc_probability', 1);
 
 session_start();
-$_SESSION['user_id']=$_SESSION['sessData']['userID'];
-$_SESSION['user_name']='Bohdan Mostytskyy';
+$_SESSION['user_id']=isset($_SESSION['sessData']['userID'])? $_SESSION['sessData']['userID'] : 1;
+$_SESSION['user_name']=isset($_SESSION['sessData']['userName'])?$_SESSION['sessData']['userName'] :'Demo User';
 $feature='home';
 //$action='view';
 if(isset($_GET['feature']))
@@ -93,11 +93,7 @@ if ($feature==='posts')
                 Images<span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="home.php">Explore</a></li>
                 <li><a href="home.php?feature=album&action=view">Albums</a></li>
-                <li><a href="home.php?feature=newalbums&action=view">NEW Albums</a></li>
-                <li><a href="home.php?feature=posts&action=view">POSTS</a></li>
-                <li><a href="home.php">Images</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -106,10 +102,10 @@ if ($feature==='posts')
               </a>
               <ul class="dropdown-menu">
                 <li><a href="home.php?feature=places&action=viewlist">Places</a></li>
-                <li><a href="home.php">Events</a></li>
-                <li><a href="home.php">Restaurants</a></li>
-                <li><a href="home.php">View trips</a></li>
-                <li><a href="home.php">Plan a trip</a></li>
+                <li><a href="home.php?feature=events&action=viewlist">Events</a></li>
+                <li><a href="home.php?feature=cafes&action=viewlist">Restaurants</a></li>
+                <li><a href="home.php?feature=trips&action=viewlist">View trips</a></li>
+                <li><a href="home.php?feature=trips&action=new_trip">Plan a trip</a></li>
               </ul>
             </li>
           </ul>
@@ -130,8 +126,7 @@ if ($feature==='posts')
                   <a href="home.php">
                       <img src="img/guy-3.jpg" alt="">
                   </a>
-                  <h1>John Breakgrow</h1>
-                  <p>@username</p>
+                  <h1><?php echo $_SESSION['user_name'];?></h1>
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
@@ -142,13 +137,6 @@ if ($feature==='posts')
                       <span class="label label-info pull-right r-activity">9</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="home.php"> 
-                      <i class="fa fa-users"></i> People
-                      <span class="label label-info pull-right r-activity">10</span>
-                    </a>
-                  </li>
-                  <li><a href="home.php"> <i class="fa fa-image"></i> Images</a></li>
                   <li><a href="home.php?feature=album&action=view"> <i class="fa fa-folder-open"></i> Albums</a></li>
                   <li><a href="home.php?feature=community"> <i class="fa fa-group"></i> Communities</a></li>
                   <li><a href="home.php?feature=pollsystem"> <i class="fa fa-comment"></i> Polls</a></li>
@@ -173,7 +161,6 @@ if ($feature==='posts')
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="features/Contact_form/indexnew.php"> <i class="fa fa-globe"></i> Contact us</a></li>
                   <li><a href="home.php?feature=faq"> <i class="fa fa-question-circle"></i> FAQ</a></li>
-                  <li><a href="home.php?feature=rssfeed">RSS</a></li>
                 </ul>
               </div>
             </div>
