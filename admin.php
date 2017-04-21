@@ -54,24 +54,12 @@ if(isset($_GET['feature']))
             <li><a href="admin.php">Admin panel</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                Images<span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="admin.php">Explore</a></li>
-                <li><a href="admin.php">Albums</a></li>
-                <li><a href="admin.php">Images</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 Trips<span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li><a href="admin.php?feature=places$action=viewlist">Places</a></li>
-                <li><a href="admin.php">Events</a></li>
-                <li><a href="admin.php">Restaurants</a></li>
-                <li><a href="admin.php">View trips</a></li>
-                <li><a href="admin.php">Plan a trip</a></li>
+                <li><a href="admin.php?feature=events&action=viewlist">Events</a></li>
+                <li><a href="admin.php?feature=cafes&action=viewlist">Restaurants</a></li>
               </ul>
             </li>
           </ul>
@@ -89,25 +77,13 @@ if(isset($_GET['feature']))
             <div class="widget">
               <div class="widget-body">
 
-                <ul class="nav nav-pills nav-stacked">                 
+                <ul class="nav nav-pills nav-stacked">
                   <li>
                     <a href="admin.php?feature=dashboard">
                       <i class="fa fa-users"></i> Dashboard
                       <span class="label label-info pull-right r-activity">10</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="#"> 
-                      <i class="fa fa-envelope"></i> Messages
-                    </a>
-                  </li>
-                  <li><a href="#"> <i class="fa fa-image"></i> Images</a></li>
-                  <li><a href="#"> <i class="fa fa-folder-open"></i> Albums</a></li>
-                  <li><a href="#"> Image sliders</a></li>
-                  <li><a href="#"> <i class="fa fa-group"></i> Groups</a></li>                  
-                  <li><a href="#"> <i class="fa fa-comment"></i> Polls</a></li>                 
-                  <li><a href="#"> Posts(Admin panel CRUD)</a></li>                 
-                  <li><a href="#"> <i class="fa fa-comment"></i> Polls</a></li>
                 </ul>
               </div>
             </div>
@@ -118,8 +94,6 @@ if(isset($_GET['feature']))
                   <li><a href="admin.php?feature=places&action=viewlist"> <i class="fa fa-map"></i>  Places</a></li>
                   <li><a href="admin.php?feature=events&action=viewlist"> <i class="fa fa-calendar"></i> Events</a></li>
                   <li><a href="admin.php?feature=cafes&action=viewlist"> <i class="fa fa-glass"></i> Restaurants</a></li>
-                  <li><a href="admin.php?feature=trips&action=viewlist"> <i class="fa fa-car"></i> Trips</a></li>
-                  <li><a href="#"> <i class="fa fa-tasks"></i> Plan trip</a></li>
                 </ul>
               </div>
             </div>
@@ -127,10 +101,7 @@ if(isset($_GET['feature']))
             <div class="widget">
               <div class="widget-body">
                 <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#"> <i class="fa fa-globe"></i> Contact us</a></li>
                   <li><a href="admin.php?feature=faq  "> <i class="fa fa-question-circle"></i> FAQ</a></li>
-                  <li><a href="#"> Alerts</a></li>
-                  <li><a href="#"> Social sharing</a></li>
                 </ul>
               </div>
             </div>
