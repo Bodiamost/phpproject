@@ -68,7 +68,7 @@
 		{
 			$targetDir = "features/places/images/";
 			$targetName = uniqid("place");
-			require_once '../imageUploadHelper.php';
+			require_once 'features/imageUploadHelper.php';
 			$smg = uploadImage($targetDir,$targetName);
 			echo $smg;
 			$place->setImage($targetDir.$targetName);

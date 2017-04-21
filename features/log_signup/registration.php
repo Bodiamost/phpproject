@@ -1,4 +1,5 @@
 <?php
+//session_save_path(getcwd().'/../../tmp'); //for Ipage
 session_start();
 $sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
 if(!empty($sessData['status']['msg'])){

@@ -21,7 +21,7 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
-
+session_save_path(getcwd().'/../../tmp'); //for Ipage
 session_start();
 
 //If this automatic URL doesn't work, set it yourself manually

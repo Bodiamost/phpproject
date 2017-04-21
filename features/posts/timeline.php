@@ -1,10 +1,16 @@
 
 <?php
+ini_set('display_errors',1);
 require_once "connect.php";
 require_once "features/posts/disPosts.php";
 require_once "features/posts/getinfo.php";
 require_once "features/posts/newPost.php";
-
+$action= isset($_GET['action'])? $_GET['action'] : '';
+if($action=='map')
+{
+    require_once 'features/posts/chk.php';
+    return;
+}
 //include('errorhandle.php');
 $obj=new getinfo();
 $fname=$obj->getfname();
@@ -13,7 +19,6 @@ $pic=$obj->getpic();
 $p=new disPosts();
 
 $result=$p->disPosts();
-//var_dump($result);
 if(isset($_POST['add']))
 {
 
@@ -211,12 +216,13 @@ if(isset($_POST['add']))
                     var lati=$("#latInput").val();
                     var lang=$("#lngInput").val();
                     var zi=$("#zoomInput").val();
+                    var p=$("#pac-input").val();
                     //console.log(lati);
                     //
-                    $.post("locpost.php",{lat:lati,lng:lang,zm:zi},function (data) {
+                    $.post("features/posts/locpost.php",{lat:lati,lng:lang,zm:zi,pl:p},function (data) {
                         //alert(data);
                         console.log(data);
-                        window.location.replace("checkins.php");
+                        window.location.replace("home.php?feature=posts&action=map");
                     });
                     return false;
                 });

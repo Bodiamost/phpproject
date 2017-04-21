@@ -8,7 +8,7 @@
 	$categories=$eventsobj->getCategories();
 	$id=filter_input(INPUT_GET, 'id');
 	$event=$eventsobj->getEvent($id);
-	$open_hours=json_decode($event->getHours());
+	//$open_hours=json_decode($event->getHours());
 
     $validate=new Validate();
 	$fields=$validate->getFields();
@@ -61,8 +61,8 @@
 		{
 			$targetDir = "features/events/images/";
 			$targetName = uniqid("event");
-			require_once '../imageUploadHelper.php';
-			$smg = uploadImage($targetDir,$targetName);
+			require_once 'features/imageUploadHelper.php';
+			$smg = uploadImage($targetDir,$targetName,"event");
 			echo $smg;
 			$event->setImage($targetDir.$targetName);
 		}

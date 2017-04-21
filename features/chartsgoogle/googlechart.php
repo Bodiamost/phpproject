@@ -1,5 +1,5 @@
 <?php  
- $connect = mysqli_connect("network.cga94bd83uty.ca-central-1.rds.amazonaws.com:3306", "teammember", "phpteam1!", "network");
+ $connect = mysqli_connect("bohdanmostcom.ipagemysql.com:3306", "teammember", "phpteam1!", "network");
  ?>
 
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>

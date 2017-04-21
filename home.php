@@ -4,19 +4,20 @@ ini_set('session.save_path',getcwd(). '/tmp'); //for my laptop
 ini_set('session.gc_probability', 1);
 
 session_start();
-$_SESSION['user_id']=1;
-$_SESSION['user_name']='Manpreet Kaur';
+$_SESSION['user_id']=$_SESSION['sessData']['userID'];
+$_SESSION['user_name']='Bohdan Mostytskyy';
 $feature='home';
 //$action='view';
 if(isset($_GET['feature']))
 {
   $feature=filter_input(INPUT_GET, 'feature');
 }
-
-/*if ($feature==='rssfeed')
+/*
+if ($feature==='faq')
 {
-    header('Location: features/rssfeed/index.php');
+    header('Location: features/community/userfaq.php');
 }
+
 if ($feature==='polls')
 {
     header('Location: features/polls/index.php');
@@ -149,8 +150,8 @@ if ($feature==='posts')
                   </li>
                   <li><a href="home.php"> <i class="fa fa-image"></i> Images</a></li>
                   <li><a href="home.php?feature=album&action=view"> <i class="fa fa-folder-open"></i> Albums</a></li>
-                  <li><a href="home.php"> <i class="fa fa-group"></i> Communities</a></li>                  
-                  <li><a href="home.php?feature=poll_system"> <i class="fa fa-comment"></i> Polls</a></li>
+                  <li><a href="home.php?feature=community"> <i class="fa fa-group"></i> Communities</a></li>
+                  <li><a href="home.php?feature=pollsystem"> <i class="fa fa-comment"></i> Polls</a></li>
                 </ul>
               </div>
             </div>
@@ -203,9 +204,14 @@ if ($feature==='posts')
             else if ($feature==='faq') 
 	          {
               echo '<div class="box" style="height:2200px;">';
-      		    require_once 'features/faq/userfaq.php';
+      		    require_once 'features/community/userfaq.php';
               echo '</div>';
       	    }
+            else if ($feature==='community')
+            {
+
+                require_once 'features/community/community.php';
+            }
             else if ($feature==='chat') 
             {
               echo '<div class="box" style="min-height:700px;">';
@@ -226,9 +232,11 @@ if ($feature==='posts')
             {
                 require_once 'features/rssfeed/index.php';
             }
-            else if ($feature==='poll_system')
+            else if ($feature==='pollsystem')
             {
+                echo '<div class="box" style="min-height:700px;">';
                 require_once 'features/pollsystem/index.php';
+                echo '</div>';
             }
 
             else echo "Content not found";

@@ -1,12 +1,11 @@
 <?php
-
 class Connect
 {
-   /* private static $hostname='localhost';
-    private static $username='root';
-    private static $password='300703';
-    private static $dbname="bohdantest";
-    private static $db;*/
+    /* private static $hostname='localhost';
+     private static $username='root';
+     private static $password='300703';
+     private static $dbname="bohdantest";
+     private static $db;*/
 
     private static $hostname='network.cga94bd83uty.ca-central-1.rds.amazonaws.com:3306';
     private static $username='teammember';
@@ -32,7 +31,7 @@ class Connect
             {
                 echo $e->getMessage();
             }
-        }	
+        }
         return self::$db;
     }
     public static function DBconnectMysqli()
@@ -43,10 +42,10 @@ class Connect
             if($conn->connect_error){
                 die("Failed to connect with MySQL: " . $conn->connect_error);
             }else{
-               self::$db = $conn;
+                self::$db = $conn;
             }
 
-        }   
+        }
         return self::$db;
     }
 }

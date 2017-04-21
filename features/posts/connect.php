@@ -17,6 +17,7 @@ class Connect
      private static $db;*/
 
     private static $hostname='network.cga94bd83uty.ca-central-1.rds.amazonaws.com:3306';
+    //private static $hostname='bohdanmostcom.ipagemysql.com:3306';
     private static $username='teammember';
     private static $password='phpteam1!';
     private static $dbname='network';

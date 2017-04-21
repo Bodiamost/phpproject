@@ -1,4 +1,5 @@
 <?php
+//session_save_path(getcwd().'/../../tmp'); //for Ipage
 session_start();
 $sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:'';
 if(!empty($sessData['status']['msg'])){
@@ -45,7 +46,7 @@ $url = 'social.jpg';
         <p><b>Phone: </b><?php echo $userData['phone']; ?></p>
         <p><b>Country: </b><?php echo $userData['country']; ?></p>
     </div>
-            <a href="../../home.php">Visit website</a>
+            <a href="../../home.php?feature=posts&action=view">Visit website</a>
     <?php }else{ ?>
 
     <h2>Login to Your Account</h2>

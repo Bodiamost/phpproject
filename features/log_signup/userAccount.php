@@ -1,5 +1,6 @@
 <?php
 //start session
+//session_save_path(getcwd().'/../../tmp'); //for Ipage
 session_start();
 //load and initialize user class
 include 'user.php';
@@ -34,14 +35,13 @@ if(isset($_POST['signupSubmit'])){
                     'status' => 1
                 );
 
-
                 require_once 'gmail_xoauth.php';  //connecting the gmail file here, for sending the confirmation message
                 move_uploaded_file($_FILES['prflpic']['tmp_name'], "images/" . $_FILES['prflpic']['name']);
                 $insert = $user->insert($userData);
                 //set status based on data insert
                 if($insert){
                     $sessData['status']['msg'] = 'You have registered successfully. A confirmation message has been sent to your email account,
-                     Confirm your email to login.';
+                     Confirm your email to login.';-+-
                     $sessData['status']['type'] = 'success';
                 }else{
                     $sessData['status']['type'] = 'error';
@@ -57,7 +57,8 @@ if(isset($_POST['signupSubmit'])){
     $_SESSION['sessData'] = $sessData;
     $redirectURL = ($sessData['status']['type'] == 'success')?'index.php':'registration.php';
     //redirect to the home/registration page
-    header("Location:".$redirectURL);
+    header("Location: ".$redirectURL);
+    echo $redirectURL;
 }elseif(isset($_POST['loginSubmit'])){
     //check whether login details are empty
     if(!empty($_POST['email']) && !empty($_POST['password'])){
@@ -74,6 +75,7 @@ if(isset($_POST['signupSubmit'])){
         if($userData){
             $sessData['userLoggedIn'] = TRUE;
             $sessData['userID'] = $userData['id'];
+            $sessData['userName'] = $userData['first_name'];
             $sessData['status']['type'] = 'success';
             $sessData['status']['msg'] = 'Welcome '.$userData['first_name'].'!';
         }else{
@@ -87,7 +89,7 @@ if(isset($_POST['signupSubmit'])){
     //store login status into the session
     $_SESSION['sessData'] = $sessData;
     //redirect to the home page
-    header("Location:index.php");
+    header("Location: index.php");
 }elseif(!empty($_REQUEST['logoutSubmit'])){
     //remove session data
     unset($_SESSION['sessData']);
@@ -97,8 +99,8 @@ if(isset($_POST['signupSubmit'])){
     $sessData['status']['msg'] = 'You have logout successfully from your account.';
     $_SESSION['sessData'] = $sessData;
     //redirect to the home page
-    header("Location:index.php");
+    header("Location: index.php");
 }else{
     //redirect to the home page
-    header("Location:index.php");
+    header("Location: index.php");
 }
