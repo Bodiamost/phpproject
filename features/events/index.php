@@ -75,7 +75,6 @@ else if ($action==='viewlist')
         $lat=$_POST['map_lat'];
         $lng=$_POST['map_lng'];
         $zoom=$_POST['map_zoom'];
-
         $validate->start_end_date('event_date_se',$start_date_beg,$start_date_end);
         $validate->location('event_location',$lat);
         if($fields->hasErrors())

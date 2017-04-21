@@ -55,7 +55,7 @@ class EventDAO
     public function getApprovedEventsBylocationJSON($lat,$lng,$zoom,$start_date,$end_date,$page=0,$limit=12){
         $query ="SELECT *,( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * 
                 cos( radians(   lng ) - radians(:lng) ) + sin( radians(:lat) ) * sin(radians(lat)) ) )  AS distance 
-                FROM events e JOIN item_types i ON e.global_type=i.type_id WHERE approved=1 AND event_end>:sd AND event_end<:ed HAVING distance < :zoom ORDER BY distance LIMIT ".$limit." OFFSET ".$limit*$page.";";
+                FROM events e JOIN item_types i ON e.global_type=i.type_id WHERE approved=1 AND event_end>:sd AND event_start<:ed HAVING distance < :zoom ORDER BY distance LIMIT ".$limit." OFFSET ".$limit*$page.";";
 
         $pdostmt=$this->db->prepare($query);
         $pdostmt->bindValue(':lat',$lat,PDO::PARAM_STR);
@@ -71,14 +71,16 @@ class EventDAO
     public function getApprovedEventsBylocation($lat,$lng,$zoom,$start_date,$end_date){
         $query ="SELECT *,( 3959 * acos( cos( radians(:lat) ) * cos( radians( lat ) ) * 
                 cos( radians(   lng ) - radians(:lng) ) + sin( radians(:lat) ) * sin(radians(lat)) ) )  AS distance 
-                FROM events WHERE approved=1 AND event_end>:sd AND event_end<:ed HAVING distance < :zoom ORDER BY distance LIMIT 0 , 20 ";
+                FROM events WHERE approved=1 AND event_end>:sd AND event_start<:ed HAVING distance < :zoom ORDER BY distance LIMIT 0 , 20 ";
 
         $pdostmt=$this->db->prepare($query);
+
         $pdostmt->bindValue(':lat',$lat,PDO::PARAM_STR);
         $pdostmt->bindValue(':lng',$lng,PDO::PARAM_STR);
         $pdostmt->bindValue(':zoom',$zoom,PDO::PARAM_STR);
         $pdostmt->bindValue(':sd',$start_date,PDO::PARAM_STR);
         $pdostmt->bindValue(':ed',$end_date,PDO::PARAM_STR);
+
         $pdostmt->execute();
 
         $events=$pdostmt->fetchAll(PDO::FETCH_CLASS,"Event");
