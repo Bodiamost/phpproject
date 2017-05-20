@@ -12,14 +12,59 @@
             </div>
             <div class="form-group row">
                 <label for="visit_loadness" class="col-md-4 col-form-label">Rate loadness:</label>
+
                 <div class="col-md-8">
-                    <input class="form-control" type="number" name="visit_loadness" value="<?php echo $visit->loadness;?>" min="1" max="10" required>
+                    <span class="rating">
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-5" name="visit_loadness" value="10"
+                            <?php if(isset($_POST['visit_loadness'])&&$_POST['visit_loadness']==10) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-5" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-4" name="visit_loadness" value="8"
+                            <?php if(isset($_POST['visit_loadness'])&&$_POST['visit_loadness']==8) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-4" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-3" name="visit_loadness" value="6"
+                            <?php if(isset($_POST['visit_loadness'])&&$_POST['visit_loadness']==6) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-3" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-2" name="visit_loadness" value="4"
+                            <?php if(isset($_POST['visit_loadness'])&&$_POST['visit_loadness']==4) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-2" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-1" name="visit_loadness" value="2"
+                            <?php if(isset($_POST['visit_loadness'])&&$_POST['visit_loadness']==2) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-1" class="rating-star"></label>
+                    </span>
+                    <?php echo $fields->getField('visit_loadness')->getHTML();?>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="visit_duration" class="col-md-4 col-form-label">Time spend(in min):</label>
+                <label for="visit_duration" class="col-md-4 col-form-label">Time spend:</label>
                 <div class="col-md-8">
-                    <input class="form-control" type="number" name="visit_duration" value="<?php echo $visit->duration;?>" min="1" max="2000" required>
+                    <select name="visit_duration">
+                        <option value="7" <?php if(isset($_POST['visit_duration'])&&$_POST['visit_duration']=='7')echo ' selected ';?>>Less than 15 min</option>
+                        <?php
+                        foreach (range(15,120,15) as $curInt)
+                        {
+                            if(isset($_POST['visit_duration'])&& $_POST['visit_duration']==$curInt)
+                            {
+                                echo '<option selected value="'.$curInt.'">Around '.$curInt.' min</option>';
+                            }
+                            else
+                            {
+                                echo '<option value="'.$curInt.'">Around '.$curInt.' min</option>';
+                            }
+                        }
+                        ?>
+                        <option value="150" <?php if(isset($_POST['visit_duration'])&&$_POST['visit_duration']=='150')echo ' selected ';?>>More than 2 hours</option>
+                    </select>
+                    <?php echo $fields->getField('visit_duration')->getHTML();?>
                 </div>
             </div>
         </fieldset>
@@ -43,7 +88,34 @@
             <div class="form-group row">
                 <label for="review_rating" class="col-md-4 col-form-label">Rate:</label>
                 <div class="col-md-8">
-                    <input class="form-control" type="number" class="col-md-4 col-form-label" name="review_rating" value="<?php echo $review->rating;?>" placeholder="" min="1" max="10" required>
+                     <span class="rating">
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-51" name="review_rating" value="10"
+                               <?php if(isset($_POST['review_rating'])&&$_POST['review_rating']==10) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-51" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-41" name="review_rating" value="8"
+                            <?php if(isset($_POST['review_rating'])&&$_POST['review_rating']==8) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-41" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-31" name="review_rating" value="6"
+                            <?php if(isset($_POST['review_rating'])&&$_POST['review_rating']==6) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-31" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-21" name="review_rating" value="4"
+                            <?php if(isset($_POST['review_rating'])&&$_POST['review_rating']==4) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-21" class="rating-star"></label>
+                        <input type="radio" class="rating-input"
+                               id="rating-input-1-11" name="review_rating" value="2"
+                            <?php if(isset($_POST['review_rating'])&&$_POST['review_rating']==2) echo ' checked '?>
+                        />
+                        <label for="rating-input-1-11" class="rating-star"></label>
+                    </span>
+                    <?php echo $fields->getField('review_rating')->getHTML();?>
                 </div>
             </div>
         </fieldset>

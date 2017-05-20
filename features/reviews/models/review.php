@@ -59,23 +59,53 @@ class reviewDAO
         $pdostmt->bindValue(':d',$review->date,PDO::PARAM_STR);
         $pdostmt->bindValue(':r',$review->rating,PDO::PARAM_STR);
         $pdostmt->execute();
+        $review=$this->getReviewVisitByVisitId($review->visit_id);
+        $this->updateItemRating($review);
     }
 
     public function deleteReview($review){
+        $reviewold=$this->getReviewVisitByVisitId($review->visit_id);
         $query ="DELETE FROM reviews WHERE id=:id";
         $pdostmt=$this->db->prepare($query);
         $pdostmt->bindValue(':id',$review->id,PDO::PARAM_STR);
-        
-        return $pdostmt->execute();
+        $pdostmt->execute();
+        $this->updateItemRating($reviewold);
     }
 
     public function getReviewVisitById($id){
-        $query ="SELECT r.id,v.item_type_id,v.item_id,r.title,v.user_id FROM reviews r, visits v WHERE r.id=:id AND r.visit_id=v.id";
+        $query ="SELECT r.id,r.visit_id,v.item_type_id,v.item_id,r.title,v.user_id FROM reviews r, visits v WHERE r.id=:id AND r.visit_id=v.id";
         $pdostmt=$this->db->prepare($query);
         $pdostmt->bindValue(':id',$id,PDO::PARAM_STR);
         $pdostmt->execute();
         $review=$pdostmt->fetchAll(PDO::FETCH_CLASS,"ReviewVisit");
         return $review[0];
+    }
+    public function getReviewVisitByVisitId($id){
+        $query ="SELECT r.id,v.item_type_id,v.item_id,r.title,v.user_id, r.rating FROM reviews r, visits v WHERE v.id=:id AND r.visit_id=v.id";
+        $pdostmt=$this->db->prepare($query);
+        $pdostmt->bindValue(':id',$id,PDO::PARAM_STR);
+        $pdostmt->execute();
+        $review=$pdostmt->fetchAll(PDO::FETCH_CLASS,"ReviewVisit");
+        return $review[0];
+    }
+
+    public function updateItemRating($review){
+
+        if($review->item_type_id=='1')
+            $table="places";
+        elseif($review->item_type_id=='2')
+            $table="events";
+        elseif($review->item_type_id=='3')
+            $table="restaurants";
+        elseif($review->item_type_id=='4')
+            $table="trips";
+        else
+            return;
+        $query ="UPDATE ".$table." p SET rating =(SELECT ROUND(AVG(r.rating)) FROM reviews r, visits v WHERE r.visit_id=v.id AND v.item_type_id=:typeid AND v.item_id=p.id) WHERE p.id=:id";
+        $pdostmt=$this->db->prepare($query);
+        $pdostmt->bindValue(':id',$review->item_id,PDO::PARAM_STR);
+        $pdostmt->bindValue(':typeid',$review->item_type_id,PDO::PARAM_STR);
+        return $pdostmt->execute();
     }
 
    

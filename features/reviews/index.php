@@ -1,10 +1,13 @@
 <?php 
 //session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'\bmostyts\network\tmp'); //for winhost
 //session_save_path(dirname($_SERVER['DOCUMENT_ROOT']).'/mysite/5202PHP/network/tmp'); //for my laptop
+ini_set("display_errors",1);
 session_save_path(getcwd().'/../../tmp'); //for Ipage
 session_start();
-//sharan
-$action=filter_input(INPUT_GET, 'action');
+if(isset($_GET['action']))
+{
+    $action=filter_input(INPUT_GET, 'action');
+}
 $featuresdata=array(1=>'place',2=>'event',3=>'cafe',4=>'trip');
 if ($action==='getreviewsJSON')
 {
@@ -31,6 +34,14 @@ else if ($action==='addreviewAJAX')
 	$fields=$validate->getFields();
 	$fields->addField('review_title');
 	$fields->addField('review_desc');
+    if($type_id!=4)
+    {
+        $fields->addField('visit_loadness');
+        $fields->addField('visit_duration');
+    }
+    $fields->addField('review_rating');
+
+
 	if ($id!='' && $type_id!='')
 	{
 		$db=Connect::DBconnect();
@@ -40,7 +51,7 @@ else if ($action==='addreviewAJAX')
 		$review=new Review();
 		if (isset($_POST['savervw'])) 
 		{
-			
+
 			//$visit->id
 			if($type_id!=4)
 			{
@@ -48,8 +59,11 @@ else if ($action==='addreviewAJAX')
 				$visit->item_id=$id;
 				$visit->user_id=$_SESSION['user_id'];// From session
 				$visit->date=$_POST['visit_time'];
-				$visit->duration=$_POST['visit_duration'];
-				$visit->loadness=$_POST['visit_loadness'];
+				$visit->duration=isset($_POST['visit_duration']) ? $_POST['visit_duration'] : '';
+				$visit->loadness= isset($_POST['visit_loadness']) ? $_POST['visit_loadness'] : '';
+                $validate->text('visit_loadness',$visit->loadness);
+                $validate->text('visit_duration',$visit->duration);
+
 			}
 			else
 			{
@@ -63,10 +77,12 @@ else if ($action==='addreviewAJAX')
 			$review->title=$_POST['review_title'];
 			$review->description=$_POST['review_desc'];
 			$review->date=date("Y-m-d H:i:s");
-			$review->rating=$_POST['review_rating'];
+			$review->rating=isset($_POST['review_rating'])?$_POST['review_rating']:'';
 
+            $validate->text('review_rating',$review->rating);
 			$validate->text('review_title',$review->title);
 			$validate->text('review_desc',$review->description,true,1,10000);
+
 			if($fields->hasErrors())
 			{
 				require_once 'views/add_reviewAJAX.php';
