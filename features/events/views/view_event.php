@@ -86,7 +86,14 @@
                 
                 $.each(data, function(index,review){
                     result += "<div class='panel panel-primary row'>";
-                    result += "<div class='panel-heading col-md-12'><h4 class='pull-left'>" + review.title +"</h4><i class='pull-right'>" + review.date + "</i>  "+"</div>";
+                    result += "<div class='panel-heading col-md-12'><h4 class='pull-left'>" + review.title +"</h4><i class='pull-right'>" + review.date + "</i>  ";
+                    var int=parseInt(review.rating);
+                    var i=1;
+                    result += "<div class='pull-left'>";
+                    for(i=1; i<int;i+=2)
+                        result +="<i class=\"fa fa-star\" aria-hidden=\"true\"></i>";
+                    if(i==int) result +="<i class=\"fa fa-star-half-o\" aria-hidden=\"true\"></i>";
+                    result += "</div></div>";
 
                     result += "<div class='panel-body col-md-12'>" + review.description + "</div>";
 
@@ -106,7 +113,7 @@
                     var url='features/reviews/index.php?action=deletereview&id='+$(this).attr('rid');
                     var r = confirm("Do you confirm this delete action?");
                     if (r == true) {
-                        $.post(url, function (data) { loadReviews();});
+                        $.post(url, function (data) {loadReviews();});
                         
                     } else {
                         loadReviews();
